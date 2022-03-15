@@ -235,7 +235,7 @@ svg:hover path {
         flex-direction: column-reverse;
     }
 
-    sidebar {
+    app-sidebar {
         height: 60px;
         width: 100%;
     }
