@@ -8,7 +8,7 @@ let subscribedEvents = [];
 
 document.addEventListener("app-init", () => {
   console.log("%c[Application Initialized]", "color: #0076e3");
-  console.log('Change 3');
+  console.log('Change 4');
 });
 
 document.addEventListener("route-changed", () => {
