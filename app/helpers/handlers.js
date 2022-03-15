@@ -8,7 +8,7 @@ export class Router {
 
     setupEvents() {
         document.addEventListener('change-route', e => {
-            window.history.pushState({}, "", '/mini-shop' + e.detail.targetRoute);
+            window.history.pushState({}, "", e.detail.targetRoute);
             this.handleLocation();
         })
 
@@ -18,8 +18,7 @@ export class Router {
     }
 
     async handleLocation() {
-        const currentLocation = window.location.pathname;
-        const path = currentLocation.replace('/mini-shop', '')
+        const path = window.location.pathname;
         const route = ROUTES[path] || ROUTES[404];
         const options = {
             method: 'GET',
