@@ -21,6 +21,15 @@ export class Router {
     async handleLocation() {
         const path = window.location.pathname;
         const route = ROUTES[path] || ROUTES[404];
+        const options = {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'text/html',
+                'Accept': 'any'
+            },
+            credentials: 'include'
+        }
         await fetch(`${ROUTES_ROOT}/${route}`)
         .then((res) => res.text())
         .then(res => {
