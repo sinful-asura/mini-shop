@@ -172,9 +172,12 @@ app-header {
 }
 
 app-sidebar {
+    display: flex;
     width: 60px;
     height: 100%;
     background-color: var(--bg-dark);
+    align-items: flex-start;
+    justify-content: center;
 }
 
 route {
@@ -238,5 +241,6 @@ svg:hover path {
     app-sidebar {
         height: 60px;
         width: 100%;
+        align-items: center;
     }
 }
