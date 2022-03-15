@@ -1,40 +1,14 @@
-import { ROOT_TAG_NAME, ROUTES, ROUTES_ROOT } from './constants.js';
+export function renderTemplate(template, replaceWith = null){
+    if(!template) return;
+    document.dispatchEvent(new CustomEvent("render-template", {
+      detail: {
+        template: template,
+        replaceWith: replaceWith
+      },
+    }))
+    console.info(`%c[Render Template] %c-> %c${template}`, "color: red;", "color: white;", "color: #0076e3");
+  }
 
-export class Router {
-    routeChanged = new Event('route-changed');
-    constructor(){
-        this.setupEvents();
-    }
-
-    setupEvents() {
-        document.addEventListener('change-route', e => {
-            window.history.pushState({}, "", e.detail.targetRoute);
-            this.handleLocation();
-        })
-
-        window.addEventListener('popstate', (e) => {
-            this.handleLocation();
-        })
-    }
-
-    async handleLocation() {
-        const path = window.location.pathname;
-        const route = ROUTES[path] || ROUTES[404];
-        const options = {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'text/html',
-                'Accept': 'any'
-            },
-            credentials: 'include'
-        }
-        await fetch(`${ROUTES_ROOT}/${route}`, options)
-        .then((res) => res.text())
-        .then(res => {
-            const root = document.querySelector(ROOT_TAG_NAME);
-            root.innerHTML = res;
-            document.dispatchEvent(this.routeChanged);
-        })
-    }
+export const pageHandlers = {
+    'login': () => {}
 }
