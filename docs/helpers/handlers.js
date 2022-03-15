@@ -21,7 +21,8 @@ export class Router {
     async handleLocation() {
         const path = window.location.pathname;
         const route = ROUTES[path] || ROUTES[404];
-        await fetch(`${ROUTES_ROOT}/${route}`)
+        // await fetch(`${ROUTES_ROOT}/${route}`)
+        await fetch('/docs/routes/test123.html')
         .then((res) => res.text())
         .then(res => {
             const root = document.querySelector(ROOT_TAG_NAME);
