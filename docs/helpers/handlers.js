@@ -8,12 +8,11 @@ export class Router {
 
     setupEvents() {
         document.addEventListener('change-route', e => {
-            window.history.pushState({}, "", e.detail.targetRoute);
+            window.history.pushState({}, "", '/mini-shop/' + e.detail.targetRoute);
             this.handleLocation();
         })
 
         window.addEventListener('popstate', (e) => {
-            console.log(e);
             this.handleLocation();
         })
     }
