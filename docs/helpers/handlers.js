@@ -30,7 +30,7 @@ export class Router {
             },
             credentials: 'include'
         }
-        await fetch(`${ROUTES_ROOT}/${route}`)
+        await fetch(`${ROUTES_ROOT}/${route}`, options)
         .then((res) => res.text())
         .then(res => {
             const root = document.querySelector(ROOT_TAG_NAME);
