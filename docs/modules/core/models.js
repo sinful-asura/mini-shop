@@ -1,15 +1,5 @@
 import { FETCH_OPTIONS, ROOT_TAG_NAME, ROUTES, ROUTES_ROOT, TEMPLATE_ELEMENT_MATCHER } from '../../helpers/constants.js';
 import { renderTemplate } from '../../helpers/handlers.js';
-export class Component {
-    config;
-    constructor(config = {
-        selector: undefined,
-        template: undefined,
-        style: undefined
-    }){
-        this.config = config;
-    }
-}
 
 export class ApplicationWizzard {
     init = new Event('app-init');

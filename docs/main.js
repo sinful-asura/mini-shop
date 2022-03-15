@@ -28,7 +28,6 @@ document.addEventListener('render-template', async (e) => {
 document.addEventListener('remove-loader', async () => {
     const target = document.querySelector(ROOT_TAG_NAME);
     const spinner = target.querySelector(LOADER_TAG_NAME);
-    console.log(spinner);
     target.removeChild(spinner);
     const hiddenChildren = target.querySelectorAll('.is-loading');
     hiddenChildren.forEach(child => {

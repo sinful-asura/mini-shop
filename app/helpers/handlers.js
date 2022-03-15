@@ -1,9 +1,8 @@
-export function renderTemplate(template, replaceWith = null){
+export function renderTemplate(template){
     if(!template) return;
     document.dispatchEvent(new CustomEvent("render-template", {
       detail: {
-        template: template,
-        replaceWith: replaceWith
+        template: template
       },
     }))
     console.info(`%c[Render Template] %c-> %c${template}`, "color: red;", "color: white;", "color: #0076e3");
