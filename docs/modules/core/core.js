@@ -1,5 +1,6 @@
-import { Router } from "../../helpers/handlers.js";
-import { ApplicationWizzard } from "./models.js";
+import { HEADER_TAG_NAME, SIDEBAR_TAG_NAME } from "../../helpers/constants.js";
+import { renderTemplate } from "../../helpers/handlers.js";
+import { ApplicationWizzard, Router } from "./models.js";
 
 const wizzard = new ApplicationWizzard();
 const router = new Router();
@@ -8,6 +9,8 @@ let subscribedEvents = [];
 
 document.addEventListener("app-init", () => {
   console.log("%c[Application Initialized]", "color: #0076e3");
+  renderTemplate(HEADER_TAG_NAME);
+  renderTemplate(SIDEBAR_TAG_NAME);
 });
 
 document.addEventListener("route-changed", () => {
