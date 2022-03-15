@@ -1,4 +1,4 @@
-import { ROOT_TAG_NAME, ROUTES } from './constants.js';
+import { ROOT_TAG_NAME, ROUTES, ROUTES_ROOT } from './constants.js';
 
 export class Router {
     routeChanged = new Event('route-changed');
@@ -21,7 +21,7 @@ export class Router {
     async handleLocation() {
         const path = window.location.pathname;
         const route = ROUTES[path] || ROUTES[404];
-        await fetch(route)
+        await fetch(`${ROUTES_ROOT}/${route}`)
         .then((res) => res.text())
         .then(res => {
             const root = document.querySelector(ROOT_TAG_NAME);
