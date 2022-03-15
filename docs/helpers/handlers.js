@@ -19,7 +19,7 @@ export class Router {
     }
 
     async handleLocation() {
-        const path = window.location.pathname;
+        const path = window.location.pathname.replace('/mini-shop', '');
         const route = ROUTES[path] || ROUTES[404];
         const options = {
             method: 'GET',
