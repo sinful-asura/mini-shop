@@ -8,7 +8,7 @@ export class Router {
 
     setupEvents() {
         document.addEventListener('change-route', e => {
-            window.history.pushState({}, "", '/mini-shop/' + e.detail.targetRoute);
+            window.history.pushState({}, "", '/mini-shop' + e.detail.targetRoute);
             this.handleLocation();
         })
 
