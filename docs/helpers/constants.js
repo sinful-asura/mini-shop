@@ -5,7 +5,7 @@ export const LOADER_TAG_NAME = 'app-spinner';
 
 export const ROUTES_ROOT = './routes';
 export const TEMPLATES_ROOT = './templates';
-export const TEMPLATE_ELEMENT_MATCHER = /<app-[A-Za-z]*>/g;
+export const TEMPLATE_ELEMENT_MATCHER = /<app-[a-z\-]*>/g;
 
 export const ROUTES = {
     404: "not-found.html",
