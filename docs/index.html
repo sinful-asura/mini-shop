@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div id="app-wrapper">
+    <app-root>
         <app-header></app-header>
-        <div id="main-content">
+        <app-template class="main-content">
             <app-sidebar></app-sidebar>
             <app-content></app-content>
-        </div>
-    </div>
+        </app-template>
+    </app-root>
     <!-- Scipt imports -->
     <script src="./main.js" type="module"></script>
     <script src="./modules/core/core.js" type="module"></script>

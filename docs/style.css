@@ -138,14 +138,14 @@ body, html {
   font-family: 'Cascadia-Code', 'Roboto';
 }
 
-#app-wrapper {
+app-root {
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-#main-content {
+app-template.main-content {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -233,7 +233,7 @@ svg:hover path {
 }
 
 @media only screen and (max-width: 800px) {
-  #main-content {
+  app-template.main-content  {
       display: flex;
       flex-direction: column-reverse;
   }
