@@ -1,3 +1,4 @@
 init_db: 
-	sqllocaldb create MiniShop; \
+	sqllocaldb create ElfakDB; \
+	sqllocaldb start ElfakDB;
 	
