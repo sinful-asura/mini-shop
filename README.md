@@ -18,5 +18,5 @@ That means, starting point will always be homepage, after which using links insi
 
 To run this project locally, you need to have `.NET Core 6` installed, and also `SQLLocalDB` for database.
 
-To create a new database, use `sqllocaldb create MiniShop` command.
+To create a new database, use `sqllocaldb create ElfakDB` command, followed by a `sqllocaldb start ElfakDB`, or run `make init_db` if you have linux `make` function in your path.
 
