@@ -13,3 +13,10 @@ Important note: `404.html` exists to handle github pages routes that don't exist
 Considering this framework is very very very shallow since it is custom-made by me, it isn't possible to intercept the routes and routing can only be achieved from within the application.
 
 That means, starting point will always be homepage, after which using links inside the app will re-route to the corresponding locations.
+
+# Prerequisites
+
+To run this project locally, you need to have `.NET Core 6` installed, and also `SQLLocalDB` for database.
+
+To create a new database, use `sqllocaldb create MiniShop` command.
+
