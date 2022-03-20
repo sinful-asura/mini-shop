@@ -9,8 +9,6 @@ let subscribedEvents = [];
 
 document.addEventListener("app-init", () => {
   console.log("%c[Application Initialized]", "color: #0076e3");
-  renderTemplate(HEADER_TAG_NAME);
-  renderTemplate(SIDEBAR_TAG_NAME);
 });
 
 document.addEventListener("route-changed", () => {

@@ -1,15 +1,14 @@
 import { LOADER_TAG_NAME, ROOT_TAG_NAME, TEMPLATES_ROOT } from "./helpers/constants.js";
 
-setTimeout(() => {
-    document.dispatchEvent(new CustomEvent('remove-loader'))
-}, 1500)
-
 function _findElement(e) {
-    if(!e || !e.detail || !e.detail.template) return;
     return document.querySelector(e.detail.template);
 }
 
 document.addEventListener('render-template', async (e) => {
+    if(!e || !e.detail || !e.detail.template) return;
+    setTimeout(() => {
+        document.dispatchEvent(new CustomEvent('remove-loader'))
+    }, 1500)
     const target = _findElement(e);
     const template = target.nodeName.toLowerCase().replace('app-', '');
     await fetch(`${TEMPLATES_ROOT}/${template}.html`)
@@ -26,7 +25,9 @@ document.addEventListener('render-template', async (e) => {
 document.addEventListener('remove-loader', async () => {
     const target = document.querySelector(ROOT_TAG_NAME);
     const spinner = target.querySelector(LOADER_TAG_NAME);
-    target.removeChild(spinner);
+    if(spinner){
+        target.removeChild(spinner);
+    }
     const hiddenChildren = target.querySelectorAll('.is-loading');
     hiddenChildren.forEach(child => {
         child.classList.remove('is-loading');
