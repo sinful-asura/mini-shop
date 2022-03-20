@@ -1,11 +1,11 @@
-import { LOADER_TAG_NAME, ROOT_TAG_NAME, TEMPLATES_ROOT } from "./helpers/constants.js";
+import { FETCH_OPTIONS, LOADER_TAG_NAME, ROOT_TAG_NAME, TEMPLATES_ROOT } from "./helpers/constants.js";
 
 function _findElement(e) {
+    if(!e || !e.detail || !e.detail.template) return;
     return document.querySelector(e.detail.template);
 }
 
 document.addEventListener('render-template', async (e) => {
-    if(!e || !e.detail || !e.detail.template) return;
     setTimeout(() => {
         document.dispatchEvent(new CustomEvent('remove-loader'))
     }, 1500)

@@ -2020,19 +2020,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kristijan\\.nuget\\packages\\": {}
+    "C:\\Users\\AsurA\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\StarLabs\\mini-shop\\api\\api.csproj",
+      "projectUniqueName": "D:\\!Programming!\\mini-shop\\api\\api.csproj",
       "projectName": "api",
-      "projectPath": "D:\\StarLabs\\mini-shop\\api\\api.csproj",
-      "packagesPath": "C:\\Users\\Kristijan\\.nuget\\packages\\",
-      "outputPath": "D:\\StarLabs\\mini-shop\\api\\obj\\",
+      "projectPath": "D:\\!Programming!\\mini-shop\\api\\api.csproj",
+      "packagesPath": "C:\\Users\\AsurA\\.nuget\\packages\\",
+      "outputPath": "D:\\!Programming!\\mini-shop\\api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Kristijan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\AsurA\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -2081,6 +2081,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.0, 6.0.0]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.1, 6.0.1]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.0, 6.0.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.0, 6.0.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -2089,7 +2107,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100-preview.1.22110.4\\RuntimeIdentifierGraph.json"
       }
     }
   }

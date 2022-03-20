@@ -19,7 +19,7 @@ export const FETCH_OPTIONS = {
     mode: 'cors',
     headers: {
         'Content-Type': 'text/html',
-        'Accept': 'any'
+        'Accept': '*/*'
     },
     credentials: 'include'
 }

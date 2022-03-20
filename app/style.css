@@ -142,7 +142,7 @@ body, html {
     font-family: 'Cascadia-Code', 'Roboto';
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -17,7 +17,7 @@ public class StoreController : ControllerBase
         return Ok(Context.Store);
     }
 
-    [HttpPost("test_post")]
+    [HttpPost("add")]
     public ActionResult Post() {
         var obj = new {
             x = 5,
