@@ -78,6 +78,85 @@ export const pageHandlers = {
         }
       }))
     },
+    'home': () => {
+      document.dispatchEvent(new CustomEvent('change-route', {
+        detail: {
+          targetRoute: '/stores'
+        }
+      }))
+    },
+    'employee-list': async (id) => {
+      if(id === null || id === undefined) return;
+      document.dispatchEvent(new CustomEvent('change-route', {
+        detail: {
+          targetRoute: '/employee-list'
+        }
+      }))
+      fetch(`${apiUrl}/user/all`, {
+        method: "GET",
+        mode: "cors",
+        headers: BASE_HEADERS
+      })
+      .then(res => {
+        if(res.ok){
+          return res.json();
+        } else{
+          pageHandlers['home']();
+        }
+      })
+      .then(data => {
+        if(!data) return;
+          console.info(data);
+          localStorage.setItem("employeeList", JSON.stringify(data))
+          document.dispatchEvent(new CustomEvent('remove-loader'));
+          setTimeout(() => {
+            for(const employee of data){
+              document.dispatchEvent(new CustomEvent('insert-template', {
+                detail: {
+                  root: 'employee-list-container',
+                  template: 'app-employee',
+                  data: {
+                    id: employee.id,
+                    name: employee.name,
+                    salary: employee.salary
+                  }
+                }
+              }))
+            }
+          }, 200);
+      })
+    },
+    'update-employee': async (id) => {
+      if(id === null || id === undefined) return;
+      const employees = JSON.parse(localStorage.getItem('employeeList'));
+      if(!employees) return;
+      const employee = employees.find(e => e.id === id);
+      document.dispatchEvent(new CustomEvent('change-route', {
+        detail: {
+          targetRoute: '/update-employee'
+        }
+      }))
+
+      setTimeout(() => {
+        document.querySelector('[update-employee-id]').innerHTML = employee.id;
+        document.querySelector('[update-employee-name]').value = employee.name;
+        document.querySelector('[update-employee-salary]').value = employee.salary;
+      }, 200)
+    },
+    'update-employee-trigger': async () => {
+      const data = {
+        id: document.querySelector('[update-employee-id]').innerHTML,
+        name: document.querySelector('[update-employee-name]').value,
+        salary: document.querySelector('[update-employee-salary]').value
+      }
+      await fetch(`${apiUrl}/user/${data.id}`, {
+        method: 'PUT',
+        mode: "cors",
+        headers: BASE_HEADERS,
+        body: JSON.stringify(data)
+      })
+      .then(() => pageHandlers['home']())
+    },
     'store': () => {
       const storeID = +(localStorage.getItem("selected_store") ?? -1);
       if(storeID !== null){
@@ -198,10 +277,9 @@ export const pageHandlers = {
       })
       .then(res => {
         if(res.ok){
-          window.history.back(2);
+          window.location.href = '/app';
         }
       })
-
     }
 }
 

@@ -12,10 +12,12 @@ export const INTERPOLATION_MATCHER = /{{[A-Za-z0-9]*}}/g;
 export const ROUTES = {
     404: "not-found.html",
     "/": "login.component.html",
-    "/stores": "stores.component.html",
     "/store": "store.component.html",
+    "/stores": "stores.component.html",
     '/add-store': 'add-store.component.html',
-    '/add-employment': 'add-employment.component.html'
+    '/employee-list': 'employee-list.component.html',
+    '/add-employment': 'add-employment.component.html',
+    '/update-employee': 'update-employee.component.html'
 }
 
 export const FETCH_OPTIONS = {

@@ -339,6 +339,63 @@ app-sidebar {
   margin: 10px 0px;
 }
 
+employee-list-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px;
+  align-items: center;
+  justify-content: center;
+}
+
+.employee-list h1 {
+  text-align: center;
+}
+
+.employee:hover{
+  background-color: var(--azure-4);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.update-employee {
+  background-color: var(--bg-dark);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  flex-direction: column;
+}
+
+.update-employee * {
+  margin: 5px;
+}
+
+.update-employee input {
+  border: 1px solid var(--azure-4);
+}
+
+.employee:hover .azure-4{
+  color: var(--white);
+}
+
+.employee {
+  background-color: var(--bg-dark);
+  min-width: 200px;
+  min-height: 150px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  margin: 10px;
+}
+
 select {
   background: none;
   border: 1px solid var(--azure-4);
@@ -457,6 +514,15 @@ svg:hover path {
 
 .azure-4 {
   color: var(--azure-4);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px var(--bg-component) inset !important;
+    box-shadow: 0 0 0 30px var(--bg-component) inset !important;
+    border: 1px solid var(--azure-4);
 }
 
 @media only screen and (max-width: 800px) {

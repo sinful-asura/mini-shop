@@ -2,6 +2,7 @@
     <div>Store name: <span class="azure-4">{{name}}</span></div>
     <div>Id: {{id}}</div>
     <hr>
+    <div style="text-align: center;" class="azure-4">Employment Data</div>
     <selected-store-staff>
         <div hidden no-staff class="azure-4" style="text-align: center; font-size: 2em">
             No staff
@@ -9,5 +10,8 @@
     </selected-store-staff>
     <div class="add-employment" onclick="document.handle('add-employment', {{id}})">
         Add Employment
+    </div>
+    <div class="add-employment" onclick="document.handle('employee-list', {{id}})" style="margin-top: 10px;">
+        See List of Employees
     </div>
 </div>
