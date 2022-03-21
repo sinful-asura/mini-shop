@@ -252,6 +252,41 @@ app-sidebar {
     justify-content: center;
 }
 
+.stores-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+stores-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+stores-container .store {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: var(--bg-dark);
+  margin: 5px 10px;
+  min-width: 400px;
+}
+
+stores-container .store:hover{
+  background-color: var(--azure-4);
+  cursor: pointer;
+}
+
 route {
   display: block;
   width: 60px;

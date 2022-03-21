@@ -9,22 +9,26 @@ builder.Services.AddDbContext<StoreContext>(options => {
     options.UseSqlServer(connectionString);
 });
 
-builder.Services.AddControllers().AddJsonOptions(o => {
-    o.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
-});
-
 // CORS
 builder.Services.AddCors(options => {
     options.AddPolicy("CORS", builder => {
-        builder.WithOrigins(new string[] {
+        builder.WithOrigins(
             "http://localhost:5091",
             "https://localhost:7098",
             "http://127.0.0.1:5091",
             "https://127.0.0.1:7098",
-        })
+            "http://localhost:5500",
+            "https://localhost:5500",
+            "http://127.0.0.1:5500",
+            "https://127.0.0.1:5500"
+        )
         .AllowAnyHeader()
         .AllowAnyMethod();
     });
+});
+
+builder.Services.AddControllers().AddJsonOptions(o => {
+    o.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
 });
 
 // Add services to the container.

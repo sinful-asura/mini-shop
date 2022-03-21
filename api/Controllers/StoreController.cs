@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Models;
 namespace API.Controllers;
 
@@ -12,8 +13,34 @@ public class StoreController : ControllerBase
     }
  
     [HttpGet("all")]
-    public ActionResult Get(){
-        return Ok(Context.Store);
+    public async Task<ActionResult> GetAllStores(){
+        try {
+            var stores = await Context.Store.ToListAsync();
+            if(stores != null){
+                return Ok(stores);
+            } else {
+                return NotFound("No stores found");
+            }
+        } catch (Exception e) {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult> GetSingleStore(int id){
+        try {
+            var target = await Context.Store
+            .Where(s => s.ID == id)
+            .Include(s => s.Staff)
+            .FirstOrDefaultAsync();
+            if(target != null) {
+                return Ok(target);
+            } else {
+                return NotFound($"No store with ID: {id} found.");
+            }
+        } catch (Exception e) {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost("add")]
@@ -27,20 +54,41 @@ public class StoreController : ControllerBase
         return Ok(store);
     }
 
-    [HttpPut("update/{id}")]
-    public ActionResult UpdateStore(int id, [FromBody] Store store) {
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateStore(int id, [FromBody] Store store) {
         try{
-            var selectedStore = Context.Store
-            .Where(s => s.ID == id)
-            .FirstOrDefault();
-            return Ok(selectedStore);
+            var target = await Context.Store.Where(s => s.ID == id).FirstOrDefaultAsync();
+            if(target != null){
+                target.Name = store.Name;
+                target.Staff = store.Staff;
+                await Context.SaveChangesAsync();
+                return Ok(target);
+            } else {
+                return NotFound("Store doesnt exist!");
+            }
         } catch(Exception e){
             return BadRequest(e.Message);
         }
     }
 
-    [HttpDelete("test_delete")]
-    public ActionResult Delete() {
-        return Ok("Delete Works");
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteStore(int id) {
+        try{
+            var target = await Context.Store.Where(s => s.ID == id).FirstOrDefaultAsync();
+            if(target != null){
+                var removedStore = new {
+                    id = target.ID,
+                    name = target.Name,
+                    action = "DELETED"
+                };
+                Context.Store.Remove(target);
+                await Context.SaveChangesAsync();
+                return Ok(removedStore);
+            } else {
+                return NotFound("Store doesn't exist!");
+            }
+        } catch(Exception e){
+            return BadRequest(e.Message);
+        }
     }
 }

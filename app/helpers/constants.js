@@ -7,11 +7,13 @@ export const LOADER_TAG_NAME = 'app-spinner';
 export const ROUTES_ROOT = './routes';
 export const TEMPLATES_ROOT = './templates';
 export const TEMPLATE_ELEMENT_MATCHER = /<app-[a-z\-]*>/g;
+export const INTERPOLATION_MATCHER = /{{[A-Za-z0-9]*}}/g;
 
 export const ROUTES = {
     404: "not-found.html",
     "/": "login.component.html",
     "/stores": "stores.component.html",
+    "/store": "store.component.html"
 }
 
 export const FETCH_OPTIONS = {
@@ -22,4 +24,9 @@ export const FETCH_OPTIONS = {
         'Accept': '*/*'
     },
     credentials: 'include'
+}
+
+export const BASE_HEADERS = {
+    'Content-Type': 'application/json, text/plain',
+    'Accept': '*/*'
 }

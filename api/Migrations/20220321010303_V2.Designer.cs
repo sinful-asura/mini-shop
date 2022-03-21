@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 
@@ -11,9 +12,10 @@ using Models;
 namespace api.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220321010303_V2")]
+    partial class V2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,30 +142,19 @@ namespace api.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Models.WorksIn", b =>
+            modelBuilder.Entity("StoreUser", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("StaffID")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("StoreID")
+                    b.Property<int>("WorkplacesID")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
+                    b.HasKey("StaffID", "WorkplacesID");
 
-                    b.HasKey("ID");
+                    b.HasIndex("WorkplacesID");
 
-                    b.HasIndex("StoreID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("WorksIn");
+                    b.ToTable("StoreUser");
                 });
 
             modelBuilder.Entity("Models.Item", b =>
@@ -190,23 +181,19 @@ namespace api.Migrations
                     b.Navigation("Seller");
                 });
 
-            modelBuilder.Entity("Models.WorksIn", b =>
+            modelBuilder.Entity("StoreUser", b =>
                 {
-                    b.HasOne("Models.Store", "Store")
-                        .WithMany("Staff")
-                        .HasForeignKey("StoreID")
+                    b.HasOne("Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("StaffID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.User", "User")
-                        .WithMany("Workplaces")
-                        .HasForeignKey("UserID")
+                    b.HasOne("Models.Store", null)
+                        .WithMany()
+                        .HasForeignKey("WorkplacesID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Store");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.Sale", b =>
@@ -217,16 +204,6 @@ namespace api.Migrations
             modelBuilder.Entity("Models.Section", b =>
                 {
                     b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("Models.Store", b =>
-                {
-                    b.Navigation("Staff");
-                });
-
-            modelBuilder.Entity("Models.User", b =>
-                {
-                    b.Navigation("Workplaces");
                 });
 #pragma warning restore 612, 618
         }

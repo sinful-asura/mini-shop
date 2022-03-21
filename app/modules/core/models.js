@@ -30,9 +30,7 @@ export class Router {
     async handleLocation() {
         const currentPath = window.location.pathname;
         const path = currentPath.replace('/app', '');
-        console.log(path);
         const route = ROUTES[path] || ROUTES[404];
-        console.log(route);
         await fetch(`${ROUTES_ROOT}/${route}`)
         .then((res) => res.text())
         .then(res => {
@@ -45,6 +43,10 @@ export class Router {
                     element = element.replace(/[<>]/g,'');
                     renderTemplate(element);
                 })
+                const handler = root.querySelector("[handler]");
+                if(handler){
+                    document.handle(handler.getAttribute('handler'));
+                }
             }
         })
     }

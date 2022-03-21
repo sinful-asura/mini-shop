@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Models {
     [Table("Store")]
@@ -10,7 +11,7 @@ namespace Models {
         [Required]
         [MaxLength(255)]
         public string Name { get; set; } = "STORE_NAME_UNSET";
-
-        public List<User> Staff { get; set; } = new List<User>();
+        [JsonIgnore]
+        public List<WorksIn>? Staff { get; set; } = new List<WorksIn>();
     }
 }
