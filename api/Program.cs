@@ -9,6 +9,10 @@ builder.Services.AddDbContext<StoreContext>(options => {
     options.UseSqlServer(connectionString);
 });
 
+builder.Services.AddControllers().AddJsonOptions(o => {
+    o.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+});
+
 // CORS
 builder.Services.AddCors(options => {
     options.AddPolicy("CORS", builder => {

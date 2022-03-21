@@ -5,7 +5,8 @@ namespace Models {
     [Table("Item")]
     public class Item {
         [Key]
-        public int ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; private set; }
         [MaxLength(255)]
         public string Name { get; set; } = "ITEM_NAME_UNSET";
         [Required]

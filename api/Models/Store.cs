@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,7 +5,8 @@ namespace Models {
     [Table("Store")]
     public class Store {
         [Key]
-        public int ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; private set; }
         [Required]
         [MaxLength(255)]
         public string Name { get; set; } = "STORE_NAME_UNSET";

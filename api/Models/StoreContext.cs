@@ -8,18 +8,7 @@ namespace Models {
         public DbSet<Section> Section { get; set; } = null!;
         public DbSet<Sale> Sale { get; set; } = null!;
 
-        public StoreContext(DbContextOptions options): base(options){
-
-        }
-
-        // protected override void OnModelCreating(ModelBuilder modelBuilder) {
-        //     base.OnModelCreating(modelBuilder);
-
-        //     modelBuilder
-        //     .Entity<Item>()
-        //     .HasMany<Sale>()
-        //     .WithOne(s => s.SoldItems);
-        // }
+        public StoreContext(DbContextOptions options): base(options){}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

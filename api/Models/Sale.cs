@@ -7,7 +7,8 @@ namespace Models {
     [Table("Sale")]
     public class Sale {
         [Key]
-        public int ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; private set; }
         public User Seller { get; set; } = null!;
         public List<Item> SoldItems { get; set; } = new List<Item>();
         public DateTime SaleDate { get; set; } = new DateTime();

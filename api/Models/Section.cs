@@ -6,7 +6,8 @@ namespace Models {
     [Table("Section")]
     public class Section {
         [Key]
-        public int ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; private set; }
         [Required]
         [MaxLength(255)]
         public string Name { get; set; } = "SECTION_NAME_UNSET";
