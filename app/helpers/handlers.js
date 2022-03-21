@@ -19,7 +19,9 @@ export const pageHandlers = {
       })
       .then(res => res.json())
       .then(stores => {
-          console.log(stores);
+        if(!stores) return;
+          localStorage.setItem('allStores', JSON.stringify(stores))
+          console.info(stores);
           document.dispatchEvent(new CustomEvent('remove-loader'));
           for(const store of stores) {
             document.dispatchEvent(new CustomEvent('insert-template', {
@@ -62,12 +64,144 @@ export const pageHandlers = {
               })
             );
           }
+        } else {
+          document.querySelector('[login-failed]').removeAttribute('hidden');
         }
       })
     },
     'select-store': (id) => {
       if(!id) return;
       localStorage.setItem("selected_store", id.toString())
+      document.dispatchEvent(new CustomEvent("change-route", {
+        detail: {
+          targetRoute: '/store'
+        }
+      }))
+    },
+    'store': () => {
+      const storeID = +(localStorage.getItem("selected_store") ?? -1);
+      if(storeID !== null){
+        fetch(`${apiUrl}/store/${storeID}`, {
+          method: 'GET',
+          mode: 'cors',
+          headers: BASE_HEADERS
+        })
+        .then(r => {
+          if(r.ok){
+            return r.json();
+          } else {
+            document.dispatchEvent(new CustomEvent('change-route', {
+              detail: {
+                targetRoute: '/stores'
+              }
+            }))
+          }
+        })
+        .then(store => {
+          if(!store) return;
+          console.info(store);
+          localStorage.setItem("selectedStore", JSON.stringify(store))
+          document.dispatchEvent(new CustomEvent('remove-loader'));
+          document.dispatchEvent(new CustomEvent('insert-template', {
+            detail: {
+              root: 'selected-store',
+              template: 'app-selected-store',
+              data: {
+                id: store.id,
+                name: store.name
+              }
+            }
+          }))
+          setTimeout(() => {
+            if(store && store.staff && store.staff.length === 0) {
+              document.querySelector('[no-staff]').removeAttribute("hidden");
+              return;
+            }
+            for(const employment of store.staff){
+              document.dispatchEvent(new CustomEvent('insert-template', {
+                detail: {
+                  root: 'selected-store-staff',
+                  template: 'app-store-staff',
+                  data: {
+                    id: employment.id,
+                    date: employment.startDate,
+                    type: employment.type,
+                  }
+                }
+              }))
+            }
+          }, 200)
+        })
+      }
+    },
+    'select-employment': async (id) => {
+      console.log(`Selected employment id: ${id}`);
+    },
+    'add-employment': (id) => {
+      if(id === null || id === undefined) return;
+      localStorage.setItem('employment_id', id.toString())
+      document.dispatchEvent(new CustomEvent('change-route', {
+        detail: {
+          targetRoute: '/add-employment'
+        }
+      }))
+    },
+    'delete-store': async (id) => {
+      await fetch(`${apiUrl}/store/${id}`, {
+        method: "DELETE",
+        mode: "cors",
+        headers: BASE_HEADERS
+      })
+      .then(res => {
+        if(res.ok){
+          // alert(`Store with ID: ${id} sucessfully deleted. \n Reload Application to see changes.`);
+          // dispatchEvent(new CustomEvent('change-route'), {detail: {targetRoute: '/stores'}});
+          window.location.href = '/app/';
+        }
+      })
+    },
+    'add-store': () => {
+      document.dispatchEvent(new CustomEvent('change-route', {
+        detail: {
+          targetRoute: '/add-store'
+        }
+      }))
+    },
+    'add-store-submit': async () => {
+      const data = {
+        name: document.querySelector("[new-store]").value
+      }
+      await fetch(`${apiUrl}/store`, {
+        method: 'POST',
+        mode: "cors",
+        headers: BASE_HEADERS,
+        body: JSON.stringify(data)
+      })
+      .then(res => {
+        if(res.ok){
+          document.dispatchEvent(new CustomEvent('change-route', { detail: {targetRoute: '/stores'}}))
+        }
+      })
+
+    },
+    'add-employment-submit': async () => {
+      const data = {
+        userID: +document.querySelector("[employment-user-id]").value,
+        storeID: +document.querySelector("[employment-store-id]").value,
+        type: document.querySelector("[employment-type]").value
+      }
+      await fetch(`${apiUrl}/store/new/employment`, {
+        method: 'POST',
+        mode: "cors",
+        headers: BASE_HEADERS,
+        body: JSON.stringify(data)
+      })
+      .then(res => {
+        if(res.ok){
+          window.history.back(2);
+        }
+      })
+
     }
 }
 

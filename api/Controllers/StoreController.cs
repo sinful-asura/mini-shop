@@ -34,7 +34,11 @@ public class StoreController : ControllerBase
             .Include(s => s.Staff)
             .FirstOrDefaultAsync();
             if(target != null) {
-                return Ok(target);
+                return Ok(new {
+                    id = target.ID,
+                    name = target.Name,
+                    staff = target.Staff
+                });
             } else {
                 return NotFound($"No store with ID: {id} found.");
             }
@@ -43,7 +47,7 @@ public class StoreController : ControllerBase
         }
     }
 
-    [HttpPost("add")]
+    [HttpPost]
     public async Task<ActionResult> AddStore([FromBody] Store store) {
         try {
             await Context.Store.AddAsync(store);
@@ -52,6 +56,23 @@ public class StoreController : ControllerBase
             return BadRequest(e.Message);
         }
         return Ok(store);
+    }
+
+    [HttpPost("new/employment")]
+    public async Task<ActionResult> AddUserToStore([FromBody] WorksIn employment){
+        var store = await Context.Store.Where(s => s.ID == employment.StoreID).FirstOrDefaultAsync();
+            if(store != null) {
+                if(store.Staff != null){
+                    store.Staff.Add(employment);
+                } else {
+                    store.Staff = new List<WorksIn>();
+                    store.Staff.Add(employment);
+                }
+                await Context.SaveChangesAsync();
+                return Ok("Operation succesful");
+            } else {
+                return NotFound("Store not found!");
+            }
     }
 
     [HttpPut("{id}")]

@@ -13,7 +13,9 @@ export const ROUTES = {
     404: "not-found.html",
     "/": "login.component.html",
     "/stores": "stores.component.html",
-    "/store": "store.component.html"
+    "/store": "store.component.html",
+    '/add-store': 'add-store.component.html',
+    '/add-employment': 'add-employment.component.html'
 }
 
 export const FETCH_OPTIONS = {

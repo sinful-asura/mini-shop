@@ -140,6 +140,7 @@ body, html {
     width: 100vw;
     height: 100vh;
     font-family: 'Cascadia-Code', 'Roboto';
+    overflow: hidden;
 }
 
 .form {
@@ -231,6 +232,8 @@ app-content {
     background-color: var(--bg-default);
     align-items: center;
     justify-content: center;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 app-header {
@@ -261,6 +264,101 @@ app-sidebar {
   height: 100%;
 }
 
+.store-staff {
+  background-color: var(--bg-dark);
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.add-store {
+  background-color: var(--bg-dark);
+  padding: 20px;
+  min-width: 150px;
+  min-height: 100px;
+  max-width: 200px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.5em;
+  margin: 10px auto;
+}
+
+.add-store h4 {
+  margin: 10px 0px;
+}
+
+.add-store:hover {
+  background-color: var(--azure-4);
+  cursor: pointer;
+}
+.add-store:hover h4 {
+  color: var(--white);
+}
+
+.new-store {
+  display: flex;
+  font-size: 1.4em;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.new-store input {
+  text-align: center;
+}
+
+.new-store button {
+  margin-top: 20px;
+}
+
+.new-employment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 300px;
+  width: 100%;
+  background-color: var(--bg-dark);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.new-employment * {
+  margin: 5px;
+}
+
+.new-employment input {
+  border: 1px solid var(--azure-4);
+}
+
+.new-employment h5 {
+  font-size: 1.2em;
+  font-weight: 500;
+  color: var(--azure-4);
+  margin: 10px 0px;
+}
+
+select {
+  background: none;
+  border: 1px solid var(--azure-4);
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  padding-left: 5px;
+  color: var(--azure-4);
+}
+
+.store .delete {
+  position: relative;
+  left: calc(50% - 25px);
+  bottom: 10px;
+  z-index: 2;
+}
+
 stores-container {
   display: flex;
   align-items: flex-start;
@@ -269,7 +367,25 @@ stores-container {
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
+  max-height: 550px;
+}
+
+.add-employment {
+  background-color: var(--bg-dark);
+  padding: 20px;
+  width: 200px;
+  min-height: 40px;
+  border-radius: 5px;
+  margin: 0px auto;
+  text-align: center;
+  color: var(--azure-4);
+}
+
+.add-employment:hover {
+  background-color: var(--azure-4);
+  color: white;
+  cursor: pointer;
 }
 
 stores-container .store {
@@ -347,6 +463,7 @@ svg:hover path {
     app-template.main-content  {
         display: flex;
         flex-direction: column-reverse;
+        overflow-y: auto;
     }
 
     app-sidebar {
@@ -354,4 +471,10 @@ svg:hover path {
         width: 100%;
         align-items: center;
     }
+}
+
+@media (max-width: 900px) {
+  /* .stores-component {
+    top: 90px;
+  } */
 }

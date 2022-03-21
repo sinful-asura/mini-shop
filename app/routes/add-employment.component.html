@@ -1,0 +1,15 @@
+<div class="new-employment" #employmentData>
+    <h5>Add New Employment</h5>
+    <input type="text" placeholder="User ID" employment-user-id>
+    <input type="text" placeholder="Store ID" employment-store-id>
+    <select name="employment-type" employment-type>
+        <option value="Owner">Owner</option>
+        <option value="Sales">Sales</option>
+        <option value="IT">IT</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Other">Other</option>
+    </select>
+    <button
+        onclick="document.handle('add-employment-submit')"
+    >Submit</button>
+</div>

@@ -33,8 +33,7 @@ document.addEventListener('remove-loader', async () => {
 
 document.addEventListener('insert-template', async (e) => {
     if(!e || !e.detail || !e.detail.template) return;
-    const app = document.querySelector(ROOT_TAG_NAME);
-    const root = app.querySelector(e.detail.root);
+    const root = document.querySelector(e.detail.root);
     if(!root) return;
     const template = e.detail.template.replace('app-', '');
     await fetch(`${TEMPLATES_ROOT}/${template}.html`)
