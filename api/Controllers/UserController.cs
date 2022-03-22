@@ -14,7 +14,11 @@ public class UserController : ControllerBase
     [HttpGet("all")]
     public async Task<ActionResult> GetAllUsers(){
         try {
-            var users = await Context.User.ToListAsync();
+            var users = await Context.User.Select(u => new {
+                u.ID,
+                u.Name,
+                u.Salary
+            }).ToListAsync();
             if(users != null){
                 return Ok(users);
             } else {
@@ -25,12 +29,18 @@ public class UserController : ControllerBase
         }
     }
 
-     [HttpGet("{id}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult> GetSingleUser(int id){
         try {
             var user = await Context.User.Where(u => u.ID == id).FirstOrDefaultAsync();
+            
             if(user != null){
-                return Ok(user);
+                return Ok(new {
+                    ID = user.ID,
+                    Name = user.Name,
+                    Salary = user.Salary,
+                    Workplaces = await Context.Employments.Where(e => e.UserID == user.ID).ToListAsync()
+                });
             } else {
                 return NotFound("User not found");
             }
@@ -56,6 +66,24 @@ public class UserController : ControllerBase
                 return NotFound("User not found!");
             }
         } catch (Exception e) {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> UpdateUser(int id, [FromBody] User updatedUser){
+        try {
+            var user = await Context.User.Where(u => u.ID == id).FirstOrDefaultAsync();
+            
+            if(user != null){
+                user.Name = updatedUser.Name;
+                user.Salary = updatedUser.Salary;
+                await Context.SaveChangesAsync();
+                return Ok(user);
+            } else {
+                return NotFound("User not found");
+            }
+        } catch (Exception e){
             return BadRequest(e.Message);
         }
     }

@@ -7,6 +7,7 @@ namespace Models {
         public DbSet<User> User { get; set; } = null!;
         public DbSet<Section> Section { get; set; } = null!;
         public DbSet<Sale> Sale { get; set; } = null!;
+        public DbSet<WorksIn> Employments { get; set; } = null!;
 
         public StoreContext(DbContextOptions options): base(options){}
 
